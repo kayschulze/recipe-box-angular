@@ -7,15 +7,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var recipe_1 = require("./recipe");
+var recipe_manager_1 = require("./recipe-manager");
+var recipeManager = new recipe_manager_1.RecipeManager;
+recipeManager.populateRecipes();
 var AppComponent = (function () {
     function AppComponent() {
-        this.recipes = [
-            new recipe_1.Recipe('peanut butter & jelly', ['peanutbutter', 'jelly', 'bread'], 'Spread peanutbutter on one side of the bread.  Spread jelly on one side of the other piece of bread.  Put jelly side and peanutbutter side together.'),
-            new recipe_1.Recipe('Parfait', ['yogurt', 'granola', 'fresh fruit'], 'Combine all ingredients in a cup.  Mix if desired.  Enjoy.'),
-        ];
+        this.word = 'hello';
+        this.allRecipes = recipeManager.allRecipes;
     }
     AppComponent.prototype.onSelect = function (recipe) {
+        //console.log(this.allRecipes);
         this.selectedRecipe = recipe;
     };
     AppComponent.prototype.hide = function () {
@@ -26,8 +27,9 @@ var AppComponent = (function () {
 AppComponent = __decorate([
     core_1.Component({
         selector: 'app-root',
-        template: "\n    <div class=\"container\">\n     <h1>Recipe Box</h1>\n\n     <ul>\n       <div class='well' *ngFor=\"let recipe of recipes\" [class.selected] = \"recipe === selectedRecipe\"(click) = \"onSelect(recipe)\">\n       <h3>Recipe Name: {{recipe.title}}</h3>\n\n       </div>\n     </ul>\n\n     <div *ngIf=\"selectedRecipe\">\n       <h1>{{selectedRecipe.title}}</h1>\n       <ul><li *ngFor=\"let ingredient of selectedRecipe.ingredients\">{{ingredient}}</li></ul>\n       <p>{{selectedRecipe.directions}}</p>\n\n       <button (click) = \"hide()\">Hide Recipe</button>\n     </div>\n   </div>\n  "
+        template: "\n    <div class=\"container\">\n     <h1>Recipe Box</h1>\n\n     <ul>\n       <div class='well' *ngFor=\"let recipe of allRecipes\" [class.selected] = \"recipe === selectedRecipe\"(click) = \"onSelect(recipe)\">\n       <h3>Recipe Name: {{recipe.title}}</h3>\n\n       </div>\n     </ul>\n\n     <div *ngIf=\"selectedRecipe\">\n       <recipe-details [recipe] = \"selectedRecipe\" [word]=\"word\"></recipe-details>\n\n     </div>\n\n   </div>\n  "
     })
+    //
 ], AppComponent);
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map
