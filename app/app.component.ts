@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Recipe } from './recipe';
 
 @Component({
   selector: 'app-root',
@@ -7,25 +8,29 @@ import { Component } from '@angular/core';
      <h1>Recipe Box</h1>
 
      <ul>
-       <div class='well' *ngFor="let recipe of recipes">
+       <div class='well' *ngFor="let recipe of recipes" [class.selected] = "recipe === selectedRecipe"(click) = "onSelect(recipe)">
        <h3>Recipe Name: {{recipe.title}}</h3>
-       <ul><li *ngFor="let ingredient of recipe.ingredients">{{ingredient}}</li></ul>
-       <p>{{recipe.directions}}</p>
-       <br>
+
        </div>
      </ul>
+
+     <div *ngIf="selectedRecipe">
+       <h1>{{selectedRecipe.title}}</h1>
+       <ul><li *ngFor="let ingredient of selectedRecipe.ingredients">{{ingredient}}</li></ul>
+       <p>{{selectedRecipe.directions}}</p>
+     </div>
    </div>
   `
 })
 
 export class AppComponent {
-
+  selectedRecipe : Recipe;
   recipes: Recipe[] = [
     new Recipe('peanut butter & jelly', ['peanutbutter', 'jelly', 'bread'], 'Spread peanutbutter on one side of the bread.  Spread jelly on one side of the other piece of bread.  Put jelly side and peanutbutter side together.'),
     new Recipe('Parfait', ['yogurt', 'granola', 'fresh fruit'], 'Combine all ingredients in a cup.  Mix if desired.  Enjoy.'),
   ];
-}
 
-export class Recipe {
-  constructor(public title: string, public ingredients: string [], public directions: string) { }
+  onSelect(recipe:Recipe): void {
+    this.selectedRecipe = recipe;
+  }
 }
