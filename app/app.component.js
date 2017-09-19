@@ -18,12 +18,15 @@ var AppComponent = (function () {
     AppComponent.prototype.onSelect = function (recipe) {
         this.selectedRecipe = recipe;
     };
+    AppComponent.prototype.hide = function () {
+        this.selectedRecipe = null;
+    };
     return AppComponent;
 }());
 AppComponent = __decorate([
     core_1.Component({
         selector: 'app-root',
-        template: "\n    <div class=\"container\">\n     <h1>Recipe Box</h1>\n\n     <ul>\n       <div class='well' *ngFor=\"let recipe of recipes\" [class.selected] = \"recipe === selectedRecipe\"(click) = \"onSelect(recipe)\">\n       <h3>Recipe Name: {{recipe.title}}</h3>\n\n       </div>\n     </ul>\n\n     <div *ngIf=\"selectedRecipe\">\n       <h1>{{selectedRecipe.title}}</h1>\n       <ul><li *ngFor=\"let ingredient of selectedRecipe.ingredients\">{{ingredient}}</li></ul>\n       <p>{{selectedRecipe.directions}}</p>\n     </div>\n   </div>\n  "
+        template: "\n    <div class=\"container\">\n     <h1>Recipe Box</h1>\n\n     <ul>\n       <div class='well' *ngFor=\"let recipe of recipes\" [class.selected] = \"recipe === selectedRecipe\"(click) = \"onSelect(recipe)\">\n       <h3>Recipe Name: {{recipe.title}}</h3>\n\n       </div>\n     </ul>\n\n     <div *ngIf=\"selectedRecipe\">\n       <h1>{{selectedRecipe.title}}</h1>\n       <ul><li *ngFor=\"let ingredient of selectedRecipe.ingredients\">{{ingredient}}</li></ul>\n       <p>{{selectedRecipe.directions}}</p>\n\n       <button (click) = \"hide()\">Hide Recipe</button>\n     </div>\n   </div>\n  "
     })
 ], AppComponent);
 exports.AppComponent = AppComponent;

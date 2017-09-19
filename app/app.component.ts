@@ -18,6 +18,8 @@ import { Recipe } from './recipe';
        <h1>{{selectedRecipe.title}}</h1>
        <ul><li *ngFor="let ingredient of selectedRecipe.ingredients">{{ingredient}}</li></ul>
        <p>{{selectedRecipe.directions}}</p>
+
+       <button (click) = "hide()">Hide Recipe</button>
      </div>
    </div>
   `
@@ -32,5 +34,9 @@ export class AppComponent {
 
   onSelect(recipe:Recipe): void {
     this.selectedRecipe = recipe;
+  }
+
+  hide(): void {
+    this.selectedRecipe = null;
   }
 }
