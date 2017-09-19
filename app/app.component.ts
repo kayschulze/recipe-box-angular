@@ -10,24 +10,15 @@ recipeManager.populateRecipes();
   template: `
     <div class="container">
      <h1>Recipe Box</h1>
-
      <ul>
-       <div class='well' *ngFor="let recipe of allRecipes" [class.selected] = "recipe === selectedRecipe"(click) = "onSelect(recipe)">
-       <h3>Recipe Name: {{recipe.title}}</h3>
-
+       <div *ngFor="let recipe of allRecipes" [class]="difficultyColor(recipe)" [class.selected] = "recipe === selectedRecipe"(click) = "onSelect(recipe)">
+       <h3>{{recipe.title}}</h3>
        </div>
      </ul>
-
-     <div *ngIf="selectedRecipe">
-       <recipe-details [recipe] = "selectedRecipe" [word]="word"></recipe-details>
-
-     </div>
-
-   </div>
+       <recipe-details [recipe] = "selectedRecipe"></recipe-details>
+    </div>
   `
 })
-
-//
 
 export class AppComponent {
   word = 'hello';
@@ -39,4 +30,15 @@ export class AppComponent {
     this.selectedRecipe = recipe;
   }
 
+  difficultyColor(currentRecipe) {
+    if (currentRecipe.difficulty === 3) {
+      return "well difficultly3";
+    }
+    else if (currentRecipe.difficulty == 2) {
+      return "well difficultly2";
+    }
+    else {
+      return "well difficultly1";
+    }
+  }
 }

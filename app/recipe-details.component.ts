@@ -5,20 +5,27 @@ import { Recipe } from './recipe';
   selector: 'recipe-details',
   template: `
   <div *ngIf="recipe">
-  <h1>{{recipe.title}}</h1>
-  <ul><li *ngFor="let ingredient of recipe.ingredients">{{ingredient}}</li></ul>
-  <p>{{recipe.directions}}</p>
-  <p>{{word}}
+  <h1><input [(ngModel)]="recipe.title"></h1>
+  <h3>Difficulty: <input [(ngModel)]="recipe.difficulty"></h3>
+  <ul><li *ngFor="let ingredient of recipe.ingredients; let index=index; trackBy:trackByFn"><input type="text" [(ngModel)]="recipe.ingredients[index]"></li></ul>
+  <p><input [(ngModel)]="recipe.directions"></p>
 
-  <button (click) ="hide()">Hide Recipe</button></div>
+
+  <button (click) ="hide()">Hide Recipe</button>
+
+  </div>
   `
 })
 
 export class RecipeDetailsComponent{
   @Input() recipe: Recipe;
-  @Input() word: String;
+
+  trackByFn(index: any, item: any) {
+    return index;
+  }
 
   hide(): void {
     this.recipe = null;
+    console.log(JSON.stringify(this.recipe));
   }
 }
