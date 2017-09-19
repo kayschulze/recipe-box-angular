@@ -39,7 +39,4 @@ export class AppComponent {
     this.selectedRecipe = recipe;
   }
 
-  hide(): void {
-    this.selectedRecipe = null;
-  }
 }

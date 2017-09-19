@@ -19,9 +19,6 @@ var AppComponent = (function () {
         //console.log(this.allRecipes);
         this.selectedRecipe = recipe;
     };
-    AppComponent.prototype.hide = function () {
-        this.selectedRecipe = null;
-    };
     return AppComponent;
 }());
 AppComponent = __decorate([
