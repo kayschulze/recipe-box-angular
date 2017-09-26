@@ -12,16 +12,16 @@ recipeManager.populateRecipes();
      <h1>Recipe Box</h1>
      <ul>
        <div *ngFor="let recipe of allRecipes" [class]="difficultyColor(recipe)" [class.selected] = "recipe === selectedRecipe"(click) = "onSelect(recipe)">
-       <h3>{{recipe.title}}</h3>
+         <h3>{{recipe.title}}</h3>
        </div>
      </ul>
-       <recipe-details [recipe] = "selectedRecipe"></recipe-details>
+       <recipe-details [recipe] = "selectedRecipe" [teacher] = "word"></recipe-details>
     </div>
   `
 })
 
 export class AppComponent {
-  word = 'hello';
+  word = 'Kim\'s recipe';
   selectedRecipe: Recipe;
   allRecipes  =  recipeManager.allRecipes;
 

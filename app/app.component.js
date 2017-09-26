@@ -12,7 +12,7 @@ var recipeManager = new recipe_manager_1.RecipeManager;
 recipeManager.populateRecipes();
 var AppComponent = (function () {
     function AppComponent() {
-        this.word = 'hello';
+        this.word = 'Kim\'s recipe';
         this.allRecipes = recipeManager.allRecipes;
     }
     AppComponent.prototype.onSelect = function (recipe) {
@@ -35,7 +35,7 @@ var AppComponent = (function () {
 AppComponent = __decorate([
     core_1.Component({
         selector: 'app-root',
-        template: "\n    <div class=\"container\">\n     <h1>Recipe Box</h1>\n     <ul>\n       <div *ngFor=\"let recipe of allRecipes\" [class]=\"difficultyColor(recipe)\" [class.selected] = \"recipe === selectedRecipe\"(click) = \"onSelect(recipe)\">\n       <h3>{{recipe.title}}</h3>\n       </div>\n     </ul>\n       <recipe-details [recipe] = \"selectedRecipe\"></recipe-details>\n    </div>\n  "
+        template: "\n    <div class=\"container\">\n     <h1>Recipe Box</h1>\n     <ul>\n       <div *ngFor=\"let recipe of allRecipes\" [class]=\"difficultyColor(recipe)\" [class.selected] = \"recipe === selectedRecipe\"(click) = \"onSelect(recipe)\">\n         <h3>{{recipe.title}}</h3>\n       </div>\n     </ul>\n       <recipe-details [recipe] = \"selectedRecipe\" [teacher] = \"word\"></recipe-details>\n    </div>\n  "
     })
 ], AppComponent);
 exports.AppComponent = AppComponent;
